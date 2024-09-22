@@ -1,0 +1,62 @@
+name: aprendizagem-env
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.9
+  # Core Packages
+  - numpy
+  - pandas
+  - scipy
+  - scikit-learn
+  - matplotlib
+  - seaborn
+  - jupyterlab
+  - jupyter
+  - ipython
+  - ipykernel
+  - kaggle
+
+  # Machine Learning and Deep Learning
+  - tensorflow
+  - keras
+  - pytorch
+  - torchvision
+  - xgboost
+  - lightgbm
+  - catboost
+
+  # Natural Language Processing
+  - nltk
+  - spacy
+  - gensim
+
+  # Data Manipulation and Analysis
+  - dask
+  - pyarrow
+  - fastparquet
+
+  # Data Visualization
+  - plotly
+  - bokeh
+  - altair
+
+  # Database Interaction
+  - sqlalchemy
+  - psycopg2
+  - pymysql
+
+  # Model Deployment and Serving
+  - flask
+  - fastapi
+
+  # Additional Utilities
+  - tqdm
+  - joblib
+  - requests
+  - beautifulsoup4
+  - pyyaml
+
+  # Version Control
+  - pip:
+      - gitpython
