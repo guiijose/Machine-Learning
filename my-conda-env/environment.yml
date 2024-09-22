@@ -16,6 +16,7 @@ dependencies:
   - ipython
   - ipykernel
   - kaggle
+  - liac-arff
 
   # Machine Learning and Deep Learning
   - tensorflow
