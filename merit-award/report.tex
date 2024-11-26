@@ -1,0 +1,70 @@
+\documentclass[a4paper,12pt]{article}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{booktabs}
+\usepackage{float}
+\geometry{margin=1in}
+
+% Title Page
+\title{Merit Prize Challenge 2024/2025 \\ \vspace{0.5cm} \large Breast Cancer Dataset Analysis}
+\author{Guilherme José & José Caldeira}
+\date{November 2024}
+
+\begin{document}
+
+\maketitle
+\tableofcontents
+\newpage
+
+% Sections
+\section{Introduction}
+\label{sec:introduction}
+Overview of the challenge, dataset, objectives, and the methodology followed.
+
+\subsection{Overview}
+In this task we aim to develop a model that can accurately classify a patient with or without cancer based on available medical data. This is often used to support healthcare professionals in order to enhance efficiency and enabling doctors to help a larger number of patients effectively.
+\subsection{Dataset description}
+The dataset consists of \textbf{30 numerical variables} and \textbf{1 binary variable}, the target. Patients are classified as having a \textbf{benign tumor} or a \textbf{malignant tumor}, target variable is \textbf{0} or \textbf{1}, respectively. The dataset has \textbf{no missing values}.
+\subsection{Logistic Regression}
+\subsection{EM Clustering}
+\subsection{RBF Network}
+
+\section{Logistic Regression on the original data}
+\label{sec:logistic-regression-original}
+Details of the logistic regression implementation, evaluation, and accuracy results.
+
+\section{EM Clustering Analysis}
+\label{sec:em-clustering}
+
+\subsection{Clustering with Different \(k\) Values and Silhouette Evaluation}
+Description of EM clustering performed with varying numbers of clusters (\(k\)) and analysis of clustering quality using the Silhouette score. Identification of the optimal \(k\).
+
+\subsection{Mapping Data into Clustering Probabilities}
+Details on how the data points were mapped into cluster membership probabilities using the EM model.
+
+\subsection{Logistic Regression on Mapped Data}
+Implementation of logistic regression on the data transformed into clustering probabilities and evaluation of its accuracy. Analysis of the relationship between \(k\), clustering quality, and model performance.
+
+
+\section{RBF Network Training}
+\label{sec:rbf-network}
+Training of the RBF network using the clustering with optimal \(k\).
+
+\section{Discussion}
+\label{sec:discussion}
+Key findings, correlations, and overall insights from the analysis.
+
+\section{Conclusion}
+\label{sec:conclusion}
+Summary of the challenge, results, and future directions.
+
+% References Section
+\section*{References}
+\label{sec:references}
+
+\end{document}
