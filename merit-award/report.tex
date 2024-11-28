@@ -24,18 +24,18 @@
 % Sections
 \section{Introduction}
 \label{sec:introduction}
-Overview of the challenge, dataset, objectives, and the methodology followed.
+Overview of the challenge, dataset, objectives, and methodology followed.
 
 \subsection{Overview}
-In this task we aim to develop a model that can accurately classify a patient with or without cancer based on available medical data. This is often used to support healthcare professionals in order to enhance efficiency and enabling doctors to help a larger number of patients effectively.
+In this task, we aim to develop a model that can accurately classify a patient with or without cancer based on available medical data. This is often used to support healthcare professionals to enhance efficiency and enable doctors to help more patients effectively.
 \subsection{Dataset description}
-The dataset consists of \textbf{30 numerical variables} and \textbf{1 binary variable}, the target. Patients are classified as having a \textbf{benign tumor} or a \textbf{malignant tumor}, target variable is \textbf{0} or \textbf{1}, respectively. The dataset has \textbf{no missing values}.
+The dataset consists of \textbf{30 numerical variables} and \textbf{1 binary variable}, the target. Patients are classified as having a \textbf{benign tumour} or a \textbf{malignant tumour}, the target variable is \textbf{0} or \textbf{1}, respectively. The dataset has \textbf{no missing values}.
 \subsection{Logistic Regression}
-Logistic regression is a machine learning method used to make binary classification. It differs from linear regression in the activation function and the loss function to update the weights. While in linear regression there is no activation function, logistic regression uses the sigmoid function:
+Logistic regression is a machine learning method used to perform binary classification. It differs from linear regression in the activation and loss functions to update the weights. While in linear regression there is no activation function, logistic regression uses the sigmoid function:
 \[ \sigma(z) = \frac{1}{1 + e^{-z}} \]
 
 
-The expression of logistic regression is as it follows:
+The expression of logistic regression is as follows:
 \[
 \hat{y} = \sigma(\mathbf{w} \cdot \mathbf{x} + b) =\frac{1}{1 + e^{-(\mathbf{w} \cdot \mathbf{x} + b)}}
 \]
@@ -47,14 +47,41 @@ The expression of logistic regression is as it follows:
     \item \(\hat{y}\): The predicted probability of the positive class (\(y=1\)). 
 \end{itemize}
 
-To evaluate the model, we use cross validation as loss function:
+To evaluate the model, we use cross-validation as a loss function:
 \[
 \text{Loss} = -\frac{1}{N} \sum_{i=1}^{N} \left[ y_i \log(\hat{y}_i) + (1-y_i) \log(1-\hat{y}_i) \right]
 \]
 
 \subsection{EM Clustering}
+The EM algorithm is an iterative technique for estimating the parameters of probabilistic models with latent variables, particularly mixtures of Gaussian distributions. Its goal is to maximize the likelihood of the observed data, given the model parameters \(\Theta = \{\pi_j, \boldsymbol{\mu}_j, \boldsymbol{\Sigma}_j\}_{j=1}^k\), where:  
+\begin{itemize}
+    \item \(\boldsymbol{\pi}_j\): \textit{prior} of cluster \(j\),
+    \item \(\boldsymbol{\mu}_j\): mean vector of cluster \(j\),
+    \item \(\boldsymbol{\Sigma}_j\): covariance matrix of cluster \(j\).
+\end{itemize}
+
+\paragraph{Steps of the EM Algorithm}
+\begin{enumerate}
+    \item \textbf{Initialization:} Initialize the parameters \(\Theta^{(0)}\) with some initial values.
+    \item \textbf{E-step (Expectation):} Compute the \textit{posterior} \(r_{ij}\), the probability that the data point \(i\) belongs to cluster \(j\):
+    \[
+    r_{ij} = \frac{\pi_j^{(t)} \mathcal{N}(\mathbf{x}_i | \boldsymbol{\mu}_j^{(t)}, \boldsymbol{\Sigma}_j^{(t)})}{\sum_{l=1}^k \pi_l^{(t)} \mathcal{N}(\mathbf{x}_i | \boldsymbol{\mu}_l^{(t)}, \boldsymbol{\Sigma}_l^{(t)})},
+    \]
+    where \(\mathcal{N}(\mathbf{x}_i | \boldsymbol{\mu}_j, \boldsymbol{\Sigma}_j)\) is the multivariate normal density function.
+    
+    \item \textbf{M-step (Maximization):} Update the parameters \(\Theta\) by maximizing the expected log-likelihood:
+    \[
+    \pi_j^{(t+1)} = \frac{\sum_{i=1}^N r_{ij}}{N}, \quad
+    \boldsymbol{\mu}_j^{(t+1)} = \frac{\sum_{i=1}^N r_{ij} \mathbf{x}_i}{\sum_{i=1}^N r_{ij}}, \quad
+    \boldsymbol{\Sigma}_j^{(t+1)} = \frac{\sum_{i=1}^N r_{ij} (\mathbf{x}_i - \boldsymbol{\mu}_j^{(t+1)})(\mathbf{x}_i - \boldsymbol{\mu}_j^{(t+1)})^\top}{\sum_{i=1}^N r_{ij}}.
+    \]
+
+    \item \textbf{Convergence:} Repeat the E and M steps until the change in log-likelihood (\(\Delta \mathcal{L}\)) between iterations is below a defined threshold.
+\end{enumerate}
+
+
 \subsection{RBF Network}
-\textbf{Radial Basis Function} is a type of neural network that uses Radial Basis function as activation:
+\textbf{Radial Basis Function} is a type of neural network that uses the Radial Basis function as activation:
 \[
 \phi(x, c) = \exp\left(-\gamma \|x - c\|^2\right)
 \]
@@ -64,7 +91,7 @@ To evaluate the model, we use cross validation as loss function:
     \item \(\mathbf{\gamma}\): Parameter to control the width of the RBF. Also represented by \(\frac{1}{2\sigma^2}\).
 \end{itemize}
 
-RBF Networks have \textbf{3 layers}, one for the input, the middle layer, whose activation functino is RBF and the output layer. The  middle layer has k neurons, being \textbf{k} the \textbf{number of centroids} of the model. 
+RBF Networks have \textbf{3 layers}, one for the input, the middle layer, whose activation function is RBF and the output layer. The middle layer has k neurons, being \textbf{k} the \textbf{number of centroids} of the model. 
 
 \section{Logistic Regression on the original data}
 \label{sec:logistic-regression-original}
@@ -127,6 +154,7 @@ Later, we used that mapped dataset to feed a logistic regression. These were the
         \label{fig:silhouette2}
     \end{minipage}
 \end{figure}
+
 
 The accuracy results show a slight increase from 2 to 3 in the x-axis (k values) and then decrease until k=8, after which it rises again. The first increase, even though silhouette is higher when k=2, 3 probability values might store more information than 2 and thus improve model accuracy. The decrease in accuracy is likely due to the poor silhouette score which makes the features (cluster probabilities) less informative. At the end there was a second increase in accuracy, this can be attributed to the increase in features outweight the poor silhouette scores.
 
