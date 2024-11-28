@@ -103,19 +103,19 @@ Logistic regression was applied to the raw dataset. These are the results:
     \hline
     & \textbf{Predicted Positive} & \textbf{Predicted Negative} \\
     \hline
-    \textbf{Actual Positive} & 107 & 1 \\
+    \textbf{Actual Positive} & 59 & 1 \\
     \hline
-    \textbf{Actual Negative} & 4 & 59 \\
+    \textbf{Actual Negative} & 4 & 107 \\
     \hline
     \end{array}
     \]
     \item \textbf{Accuracy}: 97.1\%
-    \item \textbf{Recall}: 99.1\%
-    \item \textbf{Specificity}: 93.7\%
+    \item \textbf{Recall}: 93.7\%
+
     
 \end{itemize}
 
-The accuracy score was excellent, this might be a confirmation that the dataset is complete and easily separable for this specific problem. Recall was even higher than accuracy, very close to 100\%. This is an important point to consider, as prioritizing an increase in recall should be given higher importance in the model’s objectives than increasing specificity.
+The accuracy score was excellent, this might be a confirmation that the dataset is complete and easily separable for this specific problem. On the other hand, recall (percentage of actual positives that were correctly classified) was lower. This might be due to a more dispersed data in the actual positives. This should be considered, as false negatives carry a greater consequence than false positives.
 
 \section{EM Clustering Analysis}
 \label{sec:em-clustering}
@@ -164,7 +164,24 @@ The recall metric peaked when the accuracy was at its lowest, for \( k \in \{ 4,
 
 \section{RBF Network Training}
 \label{sec:rbf-network}
-Training of the RBF network using the clustering with optimal \(k\).
+\begin{itemize}
+    \item \textbf{Confusion matrix}: 
+    \[
+    \begin{array}{|c|c|c|}
+    \hline
+    & \textbf{Predicted Positive} & \textbf{Predicted Negative} \\
+    \hline
+    \textbf{Actual Positive} & 51 & 0 \\
+    \hline
+    \textbf{Actual Negative} & 12 & 108 \\
+    \hline
+    \end{array}
+    \]
+    \item \textbf{Accuracy}: 93.0\%
+    \item \textbf{Recall}: 81.0\%
+
+    
+\end{itemize}
 
 \section{Discussion}
 \label{sec:discussion}
