@@ -185,12 +185,16 @@ We built a custom RBF Network feeding manually the \textbf{center} and \textbf{s
 \end{itemize}
 The performance in both accuracy and recall decreased when comparing to the logistic regression in both the original and mapped dataset.  RBF Network is using the distance of the datapoints to the centers of the clusters. We can interpret each cluster center as a feature. The closer a data point is to a cluster center, the more it exhibits the characteristics of that feature. Since there are only two clusters, the model might be underfitting, as it is relying on just two features (the centroids of the clusters).
 
-We later tried using the clusters of \textbf{k = 7} and the same approach to \textbf{sigma} and we got better results:
-\begin{itemize}
-    \item \textbf{Accuracy}: 96.0\%
-    \item \textbf{Recall}: 90.0\%
-\end{itemize}
-This confirms our claim that using only the centroids of \textbf{k = 2} can impose limits on the model to understand the complexity of the data.
+To find out if having only 2 clusters difficults learning and causes overfitting, we decided to perform RBF Network across all k values. Then we plotted the results:
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.5\textwidth]{imgs/rbf_vs_k.png}
+    \caption{Accuracy and recall scores across different k values.}
+    \label{fig:silhouette}
+\end{figure}
+
+Even though both accuracy and recall have ups and downs, overall, there is an increase in both metrics until \textbf{k = 8}, followed by a decrease in performance, likely due to overfit. These results confirm our claim that 2 clusters alone makes it hard for the model to learn the complexity of the data.
+
 \section{Discussion}
 \label{sec:discussion}
 Key findings, correlations, and overall insights from the analysis.
