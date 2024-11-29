@@ -164,6 +164,7 @@ The recall metric peaked when the accuracy was at its lowest, for \( k \in \{ 4,
 
 \section{RBF Network Training}
 \label{sec:rbf-network}
+We built a custom RBF Network feeding manually the \textbf{center} and \textbf{sigma} parameters. The centers were the centroids from clustering when \textbf{k = 2}, which had the highest silhouette score. Sigma was the \textbf{euclidean distance} between the 2 centroids. As for the updating of the weights, \textbf{SSE} was our loss function and \textbf{Moore-Penrose pseudoinverse} the update rule. These were the results:
 \begin{itemize}
     \item \textbf{Confusion matrix}: 
     \[
@@ -179,10 +180,15 @@ The recall metric peaked when the accuracy was at its lowest, for \( k \in \{ 4,
     \]
     \item \textbf{Accuracy}: 93.0\%
     \item \textbf{Recall}: 81.0\%
-
-    
 \end{itemize}
+The performance in both accuracy and recall decreased when comparing to the logistic regression in both the original and mapped dataset.  RBF Network is using the distance of the datapoints to the centers of the clusters. We can interpret each cluster center as a feature. The closer a data point is to a cluster center, the more it exhibits the characteristics of that feature. Since there are only two clusters, the model might be underfitting, as it is relying on just two features (the centroids of the clusters).
 
+We later tried using the clusters of \textbf{k = 7} and the same approach to \textbf{sigma} and we got better results:
+\begin{itemize}
+    \item \textbf{Accuracy}: 96.0\%
+    \item \textbf{Recall}: 90.0\%
+\end{itemize}
+This confirms our claim that using only the centroids of \textbf{k = 2} can impose limits on the model to understand the complexity of the data.
 \section{Discussion}
 \label{sec:discussion}
 Key findings, correlations, and overall insights from the analysis.
